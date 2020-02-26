@@ -13,34 +13,56 @@
 void GameManager::startGame() {
 
 
-    std::string  s1("Hei");
-    std::string  s2("Hello");
-    std::string  s3("Halla");
-    std::string  s4("Hola");
+    std::cout << "Input number of players" << std::endl;
+    int numberOfPlayers;
+    std::cin >> numberOfPlayers;
 
-    PlayerCharacter p1(s1, 1);
-    PlayerCharacter p2(s2, 2);
-    PlayerCharacter p3(s3, 3);
+    for (int i = 1; i < numberOfPlayers + 1; i++) {
+        std::string name;
+        int playerClass;
+        std::cout << "Player " << i << ", what is your name?" << std::endl;
+        std::cin >> name;
 
-
-    gameCharacters.emplace_back(p1);
-    gameCharacters.emplace_back(p2);
-    gameCharacters.emplace_back(p3);
-
+        std::cout << name << ", what is your class?" << std::endl;
+        std::cout << "Press 1 for Fighter" << std::endl;
+        std::cout << "Press 2 for Druid" << std::endl;
+        std::cout << "Press 3 for Kek" << std::endl;
+        std::cin >> playerClass;
+        gameCharacters.emplace_back(PlayerCharacter(name, i, playerClass));
+    }
 }
 
 
 void GameManager::run() {
+    int round = 1;
+
+    s
+    while (gameCharacters.size() > 1) {
+        std::cout << "Round " << round << " started. " << std::endl << "Stats: " << std::endl;
+        for (auto &p : gameCharacters) {
+            p.printStatus();
+        }
 
 
-    // for_each(gameCharacters.begin(), gameCharacters.end(), [](PlayerCharacter p) {p.runTurn()})
-    for(auto &p : gameCharacters) {
-        p.runTurn(gameCharacters);
+        for (auto &p : gameCharacters) {
+            p.runTurn();
+        }
+
+        std::cout << "Round " << round << " finished. " << std::endl << "Stats: " << std::endl;
+        for (auto &p : gameCharacters) {
+            p.printStatus();
+        }
+
+        round++;
+
     }
+}
 
+void GameManager::addCharacter(PlayerCharacter const &p) {
+    gameCharacters.emplace_back(p);
+}
 
-
-
-
+std::vector<PlayerCharacter> GameManager::getCharacters() {
+    return gameCharacters;
 }
 

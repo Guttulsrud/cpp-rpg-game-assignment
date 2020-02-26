@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <unordered_set>
 #include "Character.h"
 #include "PlayerCharacter.h"
 
@@ -16,15 +17,19 @@ public:
 
     void run();
 
-    std::vector<PlayerCharacter> gameCharacters;
 
     static GameManager &getInstance() {
         static GameManager instance;
         return instance;
     }
 
+    void addCharacter(const PlayerCharacter& p);
+    std::vector<PlayerCharacter> getCharacters();
+    std::vector<PlayerCharacter> gameCharacters;
+
 private:
     GameManager() = default;
+
 };
 
 

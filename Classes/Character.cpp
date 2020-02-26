@@ -6,19 +6,19 @@
 #include "Character.h"
 #include "PlayerCharacter.h"
 
-Character::Character(std::string &name, int playerId) :  m_name(name), playerId(playerId) {
+Character::Character(std::string &name, int playerId, int playerClass) :  m_name(name), playerId(playerId), m_class(playerClass) {
 }
 
 void Character::hit() {
 
 }
 
-void Character::addAttack() {
-
+void Character::addAttack(Attack &a) {
+    m_attacks.emplace_back(a);
 }
 
 std::vector<Attack> Character::getAttacks() {
-    return std::vector<Attack>();
+    return this->m_attacks;
 }
 
 int Character::getHp() {

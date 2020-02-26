@@ -10,11 +10,11 @@
 
 class PlayerCharacter : public Character {
 public:
-    explicit PlayerCharacter(std::string &name, int playerId) : Character(name, playerId) {}
+    explicit PlayerCharacter(std::string &name, int playerId, int playerClass) : Character(name, playerId, playerClass) {}
 
-    void runTurn(std::vector<PlayerCharacter> &enemies);
-    void runTurn() override;
-    int promptAction(std::vector<PlayerCharacter> &vector);
+    void runTurn();
+    int promptAction();
+    void printStatus();
 };
 
 

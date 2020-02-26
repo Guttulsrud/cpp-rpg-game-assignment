@@ -6,14 +6,18 @@
 #define ARBEIDSKRAV_ATTACK_H
 
 
+#include <string>
+
 class Attack {
 public:
     void run();
+    void toString();
     bool isReady();
+    std::string title;
 
 private:
-    int damage;
-    int cooldown;
+    int m_damage;
+    int m_coolDown;
 };
 
 
