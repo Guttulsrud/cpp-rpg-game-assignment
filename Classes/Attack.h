@@ -10,14 +10,18 @@
 
 class Attack {
 public:
+    explicit Attack(std::string &title, int damage, int coolDown);
+
     void run();
+
     void toString();
+
     bool isReady();
+
+    int m_coolDown{};
+    int m_damage{};
     std::string title;
 
-private:
-    int m_damage;
-    int m_coolDown;
 };
 
 

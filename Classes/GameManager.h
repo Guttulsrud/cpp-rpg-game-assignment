@@ -17,19 +17,20 @@ public:
 
     void run();
 
-
     static GameManager &getInstance() {
         static GameManager instance;
         return instance;
     }
+    std::vector<PlayerCharacter> &getCharacters() {
+        return getInstance().gameCharacters;
+    };
 
-    void addCharacter(const PlayerCharacter& p);
-    std::vector<PlayerCharacter> getCharacters();
     std::vector<PlayerCharacter> gameCharacters;
 
 private:
     GameManager() = default;
 
+    void addCharacter(const PlayerCharacter &p);
 };
 
 

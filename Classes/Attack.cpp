@@ -14,5 +14,9 @@ bool Attack::isReady() {
 }
 
 void Attack::toString() {
-    std::cout << title << ": " << m_damage << "AP. Ready: " << isReady() << ".\n";
+    std::cout << title << ": " << m_damage << " damage. Cooldown: " << m_coolDown << ".\n";
 }
+
+Attack::Attack(std::string &title, int damage, int coolDown) : title(title), m_damage(damage),
+                                                               m_coolDown(coolDown) {}
+

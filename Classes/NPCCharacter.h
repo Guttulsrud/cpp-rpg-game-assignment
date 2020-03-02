@@ -11,7 +11,7 @@
 
 class NPCCharacter : Character{
 public:
-    explicit NPCCharacter(std::string &name, int playerId, int playerClass) : Character(name, playerId, playerClass) {}
+    explicit NPCCharacter(std::string &name, int playerId, int playerClass, int hp) : Character(name, playerId, playerClass, hp) {}
 
     void runTurn();
 };

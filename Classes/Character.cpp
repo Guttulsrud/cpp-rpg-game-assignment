@@ -6,7 +6,10 @@
 #include "Character.h"
 #include "PlayerCharacter.h"
 
-Character::Character(std::string &name, int playerId, int playerClass) :  m_name(name), playerId(playerId), m_class(playerClass) {
+Character::Character(std::string &name, int playerId, int playerClass, int hp) : m_name(name),
+                                                                                 playerId(playerId),
+                                                                                 m_class(playerClass),
+                                                                                 m_hitPoints(hp) {
 }
 
 void Character::hit() {
@@ -27,6 +30,10 @@ int Character::getHp() {
 
 std::string Character::getName() {
     return m_name;
+}
+
+void Character::addAttack(Attack a) {
+    m_attacks.emplace_back(a);
 }
 
 
