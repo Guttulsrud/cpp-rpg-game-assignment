@@ -1,6 +1,6 @@
 #include <iostream>
 #include <random>
-#include "Classes/GameManager.h"
+#include "include/GameManager.h"
 
 
 using namespace std;

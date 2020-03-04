@@ -1,7 +1,3 @@
-//
-// Created by Håkon Guttulsrud on 05.02.2020.
-//
-
 #ifndef ARBEIDSKRAV_CHARACTER_H
 #define ARBEIDSKRAV_CHARACTER_H
 
@@ -9,6 +5,7 @@
 #include <vector>
 #include "HP.h"
 #include "Attack.h"
+
 
 class Character {
 public:
@@ -23,14 +20,16 @@ public:
     int playerId;
     HP HP;
 
-    void takeDamage(int dmg);
-    void addAttack(Attack &a);
     void printStatus();
+
+    void addAttack(Attack a);
+
 private:
     std::vector<Attack> m_attacks;
 
 protected:
     std::string m_name;
+
 };
 
 

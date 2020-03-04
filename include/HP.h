@@ -1,13 +1,8 @@
-//
-// Created by Håkon Guttulsrud on 05.02.2020.
-//
-
 #ifndef ARBEIDSKRAV_HP_H
 #define ARBEIDSKRAV_HP_H
 
 
 class HP {
-
 public:
 
     explicit HP(int hp, int ac) : m_HP(hp), m_AC(ac) {
@@ -16,6 +11,9 @@ public:
 
     void operator-=(int dmg) {
         m_HP -= dmg;
+        if(m_HP < 0) {
+            m_HP = 0;
+        }
     }
 
     void operator+=(int hp) {
@@ -26,11 +24,16 @@ public:
         m_HP = hp;
     }
 
+    bool operator>=(int comp) {
+        return m_HP >= comp;
+    }
+
+    bool operator>(int comp) {
+        return m_HP > comp;
+    }
 
     int getHP();
-
     int getMaxHP();
-
     int getAC();
 
 private:

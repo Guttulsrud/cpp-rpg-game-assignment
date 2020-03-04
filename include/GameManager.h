@@ -1,7 +1,3 @@
-//
-// Created by Håkon Guttulsrud on 05.02.2020.
-//
-
 #ifndef ARBEIDSKRAV_GAMEMANAGER_H
 #define ARBEIDSKRAV_GAMEMANAGER_H
 
@@ -21,7 +17,8 @@ public:
         static GameManager instance;
         return instance;
     }
-    std::vector<PlayerCharacter> &getCharacters() {
+
+    static std::vector<PlayerCharacter> &getCharacters() {
         return getInstance().gameCharacters;
     };
 
@@ -33,6 +30,8 @@ private:
     void addCharacter(const PlayerCharacter &p);
 
     void setUpCharacter(std::string &name, int id, int playerClass);
+
+    void removePlayer(const PlayerCharacter &p);
 };
 
 

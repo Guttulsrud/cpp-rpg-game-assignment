@@ -1,7 +1,3 @@
-//
-// Created by Håkon Guttulsrud on 05.02.2020.
-//
-
 #ifndef ARBEIDSKRAV_PLAYERCHARACTER_H
 #define ARBEIDSKRAV_PLAYERCHARACTER_H
 
@@ -16,9 +12,9 @@ public:
 
     void attackPlayer(int playerId);
 
-    void runTurn();
-
     Attack promptAttack();
+
+    void runTurn() override;
 };
 
 
