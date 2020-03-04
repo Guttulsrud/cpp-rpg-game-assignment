@@ -10,20 +10,15 @@
 
 class PlayerCharacter : public Character {
 public:
-    explicit PlayerCharacter(std::string &name, int playerId, int playerClass, int hp) : Character(name, playerId,
-                                                                                                   playerClass, hp) {}
-
-    void runTurn();
+    PlayerCharacter(std::string &name, int playerId, class HP hp) : Character(name, playerId, hp) {}
 
     void promptAction();
 
-    void printStatus();
-
-    void takeDamage(int dmg);
-
-    PlayerCharacter getPlayerById(int id);
-
     void attackPlayer(int playerId);
+
+    void runTurn();
+
+    Attack promptAttack();
 };
 
 

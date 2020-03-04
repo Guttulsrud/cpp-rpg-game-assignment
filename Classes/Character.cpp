@@ -3,37 +3,30 @@
 //
 
 #include <string>
+#include <iostream>
 #include "Character.h"
-#include "PlayerCharacter.h"
 
-Character::Character(std::string &name, int playerId, int playerClass, int hp) : m_name(name),
-                                                                                 playerId(playerId),
-                                                                                 m_class(playerClass),
-                                                                                 m_hitPoints(hp) {
-}
+Character::Character(std::string &name, int playerId, class HP hp) : m_name(name), playerId(playerId), HP(hp) {}
 
-void Character::hit() {
 
-}
-
-void Character::addAttack(Attack &a) {
-    m_attacks.emplace_back(a);
-}
-
-std::vector<Attack> Character::getAttacks() {
-    return this->m_attacks;
-}
-
-int Character::getHp() {
-    return 0;
+std::vector<Attack> &Character::getAttacks() {
+    return m_attacks;
 }
 
 std::string Character::getName() {
     return m_name;
 }
 
-void Character::addAttack(Attack a) {
+void Character::addAttack(Attack &a) {
     m_attacks.emplace_back(a);
+}
+
+void Character::takeDamage(int dmg) {
+    HP -= dmg;
+}
+
+void Character::printStatus() {
+    std::cout << m_name << ": " << HP.getHP() << "/" << HP.getMaxHP() << "HP - " << HP.getAC() << "AC" << std::endl;
 }
 
 

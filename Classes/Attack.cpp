@@ -4,19 +4,31 @@
 
 #include <iostream>
 #include "Attack.h"
+#include <iomanip>
 
-void Attack::run() {
-
-}
+using namespace std;
 
 bool Attack::isReady() {
-    return false;
+    return this->m_coolDown == 0;
 }
 
 void Attack::toString() {
-    std::cout << title << ": " << m_damage << " damage. Cooldown: " << m_coolDown << ".\n";
+    std::cout << title << ": " << std::endl << "Damage: " << m_damage << "" << std::endl << "Cooldown: " << m_coolDown
+              << "\n\n";
+
 }
 
-Attack::Attack(std::string &title, int damage, int coolDown) : title(title), m_damage(damage),
-                                                               m_coolDown(coolDown) {}
+Attack::Attack(std::string &title, int damage, int coolDown) : title(title), m_damage(damage), m_coolDown(coolDown) {
+    m_maxCoolDown = m_coolDown;
+}
+
+void Attack::run() {
+    if (m_maxCoolDown > m_coolDown) {
+        m_coolDown = m_maxCoolDown+1;
+    }
+
+
+
+
+}
 

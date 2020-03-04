@@ -12,30 +12,25 @@
 
 class Character {
 public:
-    explicit Character(std::string &name, int playerId, int playerClass, int hp);
+     Character(std::string &name, int playerId, HP hp);
 
     virtual void runTurn() = 0;
 
-    void hit();
-
-    void addAttack(Attack a);
-
-    std::vector<Attack> getAttacks();
-
-    int getHp();
-
     std::string getName();
 
-    int playerId;
-    int m_class;
+    std::vector<Attack> &getAttacks();
 
-    int m_hitPoints;
+    int playerId;
+    HP HP;
+
+    void takeDamage(int dmg);
+    void addAttack(Attack &a);
+    void printStatus();
 private:
     std::vector<Attack> m_attacks;
+
 protected:
     std::string m_name;
-
-    void addAttack(Attack &a);
 };
 
 

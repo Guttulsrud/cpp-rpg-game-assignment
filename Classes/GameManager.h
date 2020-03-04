@@ -31,6 +31,8 @@ private:
     GameManager() = default;
 
     void addCharacter(const PlayerCharacter &p);
+
+    void setUpCharacter(std::string &name, int id, int playerClass);
 };
 
 

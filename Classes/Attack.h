@@ -12,13 +12,13 @@ class Attack {
 public:
     explicit Attack(std::string &title, int damage, int coolDown);
 
-    void run();
-
     void toString();
+    void run();
 
     bool isReady();
 
-    int m_coolDown{};
+    int m_coolDown;
+    int m_maxCoolDown;
     int m_damage{};
     std::string title;
 

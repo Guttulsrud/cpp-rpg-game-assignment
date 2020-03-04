@@ -6,17 +6,20 @@
 #include <algorithm>
 #include "PlayerCharacter.h"
 #include "GameManager.h"
-#include <ctime>
 
 using std::cout;
 using std::cin;
 using std::endl;
 
 void PlayerCharacter::runTurn() {
-    cout << "\nIt's your turn, " << this->getName() << "!" << endl;
+    cout << "\nIt's your turn, " << getName() << "!" << endl;
     promptAction();
 
-
+    for(auto &a : getAttacks()) {
+        if (a.m_coolDown > 0) {
+            a.m_coolDown--;
+        }
+    }
 }
 
 
@@ -39,61 +42,56 @@ void PlayerCharacter::promptAction() {
 
 }
 
-void PlayerCharacter::printStatus() {
-    std::cout << this->m_name << ": " << this->m_hitPoints << "/100HP" << std::endl;
+Attack PlayerCharacter::promptAttack() {
+    std::cout << std::endl << "Pick an attack" << std::endl;
+    std::vector<Attack> &attacks = getAttacks();
 
+    bool validChoice = false;
+    int attackChoice = 1;
+
+    while (!validChoice) {
+        for (int i = 0; i < attacks.size(); i++) {
+            cout << "Press " << i + 1 << " for ";
+            attacks[i].toString();
+            cout << "-----------------------------------" << std::endl;
+
+        }
+
+        std::cin >> attackChoice;
+        Attack &attack = attacks[attackChoice - 1];
+
+
+        if (attack.isReady()) {
+            attack.run();
+            validChoice = true;
+        } else {
+            std::cout << "Attack is not ready yet. Pick another.." << std::endl;
+        }
+    }
+
+    return attacks[attackChoice - 1];
 }
 
-void PlayerCharacter::takeDamage(int dmg) {
-    this->m_hitPoints -= dmg;
-}
-
-
-PlayerCharacter  PlayerCharacter::getPlayerById(int id) {
-    std::vector<PlayerCharacter> characters = GameManager::getInstance().gameCharacters;
-
-    auto playerToAttack = std::find_if(characters.begin(), characters.end(),
-                                       [id](const PlayerCharacter &player) {
-                                           return player.playerId == id;
-                                       });
-    return *playerToAttack;
-}
 
 void PlayerCharacter::attackPlayer(int playerId) {
+    Attack attack = promptAttack();
 
-    PlayerCharacter &playerToAttack = GameManager::getInstance().getCharacters()[playerId-1];
+    PlayerCharacter &player = GameManager::getInstance().getCharacters()[playerId - 1];
+    int playerAc = player.HP.getAC();
+    int attackDamage = attack.m_damage;
+    int damage;
 
-    std::cout << std::endl << "Pick an attack" << std::endl;
-    std::vector<Attack> attacks = getAttacks();
-
-    for (int i = 0; i < attacks.size(); i++) {
-        cout << "Press " << i << " to use: ";
-        attacks[i].toString();
-
-    }
-
-    int wChoice;
-    std::cin >> wChoice;
-
-    int attackDmg = attacks[wChoice].m_damage;
-    //TODO: Find "true" random instead of rand! <random>
-
-    std::srand(time(0));
-    int random;
-    int random2;
-    random = std::rand() % 10 + 1;
-    random2 = std::rand() % 2 + 1;
-
-    int dmg;
-    if (random2 < 2) {
-        dmg = attackDmg - random;
+    if (playerAc > attackDamage) {
+        damage = 0;
     } else {
-        dmg = attackDmg + random;
+        damage = attackDamage - playerAc;
     }
 
-    std::cout << getName() << " attacked " << playerToAttack.getName() << " and dealt "
-              << dmg << " damage! " << endl;
-    playerToAttack.takeDamage(dmg);
+    std::cout << getName() << " attacked " << player.getName() << " with " << attack.title << "("
+              << attackDamage << "dmg). "
+              << player.getName() << " has " << playerAc << "AC and took " << damage
+              << " damage! " << endl;
+    player.takeDamage(damage);
 }
 
 
