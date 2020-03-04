@@ -3,7 +3,7 @@
 #include "../include/Character.h"
 
 Character::Character(std::string &name, int playerId, class HP hp) : m_name(name), playerId(playerId), HP(hp) {
-    addAttack(Attack("Punch", 8, 0, 1));
+    addAttack(Attack("Punch", 11, 0, 1));
     addAttack(Attack("Charge", 16, 3, 2));
 }
 

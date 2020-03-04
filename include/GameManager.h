@@ -24,6 +24,8 @@ public:
 
     std::vector<PlayerCharacter> gameCharacters;
 
+    bool checkIfWon(int id);
+
 private:
     GameManager() = default;
 
@@ -32,6 +34,9 @@ private:
     void setUpCharacter(std::string &name, int id, int playerClass);
 
     void removePlayer(const PlayerCharacter &p);
+
+    static bool checkIfWon();
+
 };
 
 

@@ -34,8 +34,8 @@ void GameManager::setUpCharacter(std::string &name, int id, int playerClass) {
 
         HP hp = HP(110, 5);
         PlayerCharacter p = PlayerCharacter(name, id, hp);
-        p.addAttack(Attack("Barbarian Punch", 13, 1, 3));
-        p.addAttack(Attack("Double Punch", 17, 2, 4));
+        p.addAttack(Attack("Barbarian Punch", 19, 1, 3));
+        p.addAttack(Attack("Double Punch", 35, 2, 4));
         addCharacter(p);
     } else if (playerClass == 2) {
 
@@ -48,7 +48,7 @@ void GameManager::setUpCharacter(std::string &name, int id, int playerClass) {
 
         HP hp = HP(120, 8);
         PlayerCharacter p = PlayerCharacter(name, id, hp);
-        p.addAttack(Attack("Fire Spell", 32, 4, 3));
+        p.addAttack(Attack("Fire Spell", 48, 5, 3));
         p.addAttack(Attack("Ice Spell", 27, 3, 4));
         addCharacter(p);
     }
@@ -70,23 +70,10 @@ void GameManager::run() {
         for (auto &p : gameCharacters) {
             if (p.HP.getHP() != 0) {
                 p.runTurn();
-            } else {
-                std::cout << p.getName() << " has been defeated!" << std::endl;
-                removePlayer(p);
-                std::cout << "-----------------------------------" << std::endl;
-
-                if(gameCharacters.size() < 2) {
-                    break;
-                }
             }
         }
-        std::cout << "-----------------------------------" << std::endl;
         round++;
-
     }
-    std::cout << gameCharacters[0].getName() << " is victorious! " << std::endl;
-    std::cout << "-----------------------------------" << std::endl;
-    std::cout << "\t GAME OVER!" << std::endl;
 }
 
 
@@ -94,17 +81,13 @@ void GameManager::addCharacter(PlayerCharacter const &p) {
     gameCharacters.emplace_back(p);
 }
 
-void GameManager::removePlayer(PlayerCharacter const &p) {
-    auto it = std::remove_if(gameCharacters.begin(),
-                             gameCharacters.end(),
-                             [p](const PlayerCharacter &player) {
-                                 return player.playerId == p.playerId;
-                             });
+bool GameManager::checkIfWon(int id) {
+    unsigned int playersAlive = gameCharacters.size() - 1;
+    for (auto &p : gameCharacters) {
+        if (p.playerId != id && p.HP.getHP() == 0) {
+            playersAlive--;
+        }
+    }
 
-    gameCharacters.erase(it, gameCharacters.end());
+    return playersAlive == 0;
 }
-
-
-
-
-
