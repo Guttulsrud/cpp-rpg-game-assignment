@@ -1,5 +1,5 @@
-#ifndef ARBEIDSKRAV_PLAYERCHARACTER_H
-#define ARBEIDSKRAV_PLAYERCHARACTER_H
+#ifndef PLAYERCHARACTER_H
+#define PLAYERCHARACTER_H
 
 #include <string>
 #include "Character.h"

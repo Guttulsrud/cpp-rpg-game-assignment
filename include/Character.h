@@ -1,6 +1,5 @@
-#ifndef ARBEIDSKRAV_CHARACTER_H
-#define ARBEIDSKRAV_CHARACTER_H
-
+#ifndef CHARACTER_H
+#define CHARACTER_H
 
 #include <vector>
 #include "HP.h"
@@ -9,7 +8,7 @@
 
 class Character {
 public:
-     Character(std::string &name, int playerId, HP hp);
+    Character(std::string &name, int playerId, HP hp);
 
     virtual void runTurn() = 0;
 

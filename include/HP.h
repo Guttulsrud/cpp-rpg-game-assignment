@@ -1,5 +1,5 @@
-#ifndef ARBEIDSKRAV_HP_H
-#define ARBEIDSKRAV_HP_H
+#ifndef HP_H
+#define HP_H
 
 
 class HP {
@@ -20,8 +20,12 @@ public:
         m_HP += hp;
     }
 
-    void operator==(int hp) {
-        m_HP = hp;
+    int operator==(int comp) {
+        return m_HP == comp;
+    }
+
+    bool operator!=(int comp) {
+        return m_HP != comp;
     }
 
     bool operator>=(int comp) {

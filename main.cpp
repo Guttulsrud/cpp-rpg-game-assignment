@@ -1,16 +1,8 @@
-#include <iostream>
-#include <random>
 #include "include/GameManager.h"
 
-
-using namespace std;
-
+//Håkon Guttulsrud 2020
 int main() {
-
-
-
-    GameManager::getInstance().startGame();
-    GameManager::getInstance().run();
-
+    GameManager::startGame();
+    GameManager::run();
     return 0;
 }

@@ -20,5 +20,7 @@ void Character::addAttack(Attack a) {
 }
 
 void Character::printStatus() {
-    std::cout << m_name << ": " << HP.getHP() << "/" << HP.getMaxHP() << "HP - " << HP.getAC() << "AC" << std::endl;
+    if (HP != 0) {
+        std::cout << m_name << ": " << HP.getHP() << "/" << HP.getMaxHP() << "HP - " << HP.getAC() << "AC" << std::endl;
+    }
 }

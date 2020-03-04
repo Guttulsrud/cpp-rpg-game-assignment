@@ -1,6 +1,5 @@
-#ifndef ARBEIDSKRAV_GAMEMANAGER_H
-#define ARBEIDSKRAV_GAMEMANAGER_H
-
+#ifndef GAMEMANAGER_H
+#define GAMEMANAGER_H
 
 #include <vector>
 #include <unordered_set>
@@ -9,9 +8,9 @@
 
 class GameManager {
 public:
-    void startGame();
+    static void startGame();
 
-    void run();
+    static void run();
 
     static GameManager &getInstance() {
         static GameManager instance;
@@ -29,13 +28,9 @@ public:
 private:
     GameManager() = default;
 
-    void addCharacter(const PlayerCharacter &p);
+    static void addCharacter(const PlayerCharacter &p);
 
-    void setUpCharacter(std::string &name, int id, int playerClass);
-
-    void removePlayer(const PlayerCharacter &p);
-
-    static bool checkIfWon();
+    static void setUpCharacter(std::string &name, int id, int playerClass);
 
 };
 

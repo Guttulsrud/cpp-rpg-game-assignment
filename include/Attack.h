@@ -1,5 +1,5 @@
-#ifndef ARBEIDSKRAV_ATTACK_H
-#define ARBEIDSKRAV_ATTACK_H
+#ifndef ATTACK_H
+#define ATTACK_H
 
 class Attack {
 public:

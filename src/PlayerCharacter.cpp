@@ -19,7 +19,7 @@ void PlayerCharacter::promptAction() {
     std::cout << "Who do you want to attack?" << std::endl << std::endl;
 
     for (auto &p : GameManager::getCharacters()) {
-        if (p.playerId != this->playerId && p.HP.getHP() != 0) {
+        if (p.playerId != this->playerId && p.HP != 0) {
             std::cout << "Press " << p.playerId << " to attack " << p.getName() << std::endl;
         }
     }
@@ -73,21 +73,17 @@ void PlayerCharacter::attackPlayer(int playerId) {
     int attackDamage = attack.m_damage;
     int damage;
 
-    if (playerAc > attackDamage) {
-        damage = 0;
-    } else {
-        damage = attackDamage - playerAc;
-    }
+    playerAc > attackDamage ? damage = 0 : damage = attackDamage - playerAc;
 
     std::cout << getName() << " attacked " << player.getName() << " with " << attack.title << "("
               << attackDamage << "dmg). "
               << player.getName() << " has " << playerAc << "AC and took " << damage
               << " damage! " << std::endl;
     player.HP -= damage;
-    if (player.HP.getHP() == 0) {
+    if (player.HP == 0) {
         std::cout << player.getName() << " is dead and has lost the game!" << std::endl;
         if (GameManager::getInstance().checkIfWon(this->playerId)) {
-            std::cout << "Player " << this->getName() << "has won!" << std::endl;
+            std::cout << "Player " << this->getName() << " has won!" << std::endl;
             std::cout << "-----------------------------------" << std::endl;
             std::cout << "\t GAME OVER!" << std::endl;
             std::cout << "-----------------------------------" << std::endl;

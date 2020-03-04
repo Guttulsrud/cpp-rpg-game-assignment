@@ -57,18 +57,18 @@ void GameManager::setUpCharacter(std::string &name, int id, int playerClass) {
 void GameManager::run() {
     int round = 1;
 
-    while (gameCharacters.size() > 1) {
+    while (getCharacters().size() > 1) {
         std::cout << "-----------------------------------" << std::endl;
         std::cout << "Round " << round << " started. " << std::endl << "Stats: " << std::endl;
         std::cout << "-----------------------------------" << std::endl;
 
-        for (auto &p : gameCharacters) {
+        for (auto &p : getCharacters()) {
             p.printStatus();
         }
         std::cout << "-----------------------------------" << std::endl;
 
-        for (auto &p : gameCharacters) {
-            if (p.HP.getHP() != 0) {
+        for (auto &p : getCharacters()) {
+            if (p.HP != 0) {
                 p.runTurn();
             }
         }
@@ -78,13 +78,13 @@ void GameManager::run() {
 
 
 void GameManager::addCharacter(PlayerCharacter const &p) {
-    gameCharacters.emplace_back(p);
+    getCharacters().emplace_back(p);
 }
 
 bool GameManager::checkIfWon(int id) {
     unsigned int playersAlive = gameCharacters.size() - 1;
     for (auto &p : gameCharacters) {
-        if (p.playerId != id && p.HP.getHP() == 0) {
+        if (p.playerId != id && p.HP == 0) {
             playersAlive--;
         }
     }
